@@ -80,7 +80,7 @@ public class UserResource {
         }
         log.info("REST request to save User 3: {}", managedUserVM);
         Group group = groupRepository.findOne(g);
-        if (g == null) {
+        if (group == null) {
             modele.put("group", "le group est obligatoire");
             error = true;
         }

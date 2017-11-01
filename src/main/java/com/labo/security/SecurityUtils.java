@@ -30,9 +30,15 @@ public final class SecurityUtils {
         SecurityContext securityContext = SecurityContextHolder.getContext();
         Authentication authentication = securityContext.getAuthentication();
         String userName ="SYSTEM";
+        
         if (authentication != null) {
-            User u = (User) authentication.getPrincipal();
+            try {
+                User u = (User) authentication.getPrincipal();
             userName = u.getUsername();
+            } catch (Exception e) {
+                userName=authentication.toString();
+            }
+            
         }
 
         return userName;

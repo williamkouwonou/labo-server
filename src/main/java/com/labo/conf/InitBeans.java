@@ -34,7 +34,9 @@ public class InitBeans {
     private PermissionRepository permissionRepository;
     @Autowired
     private GroupRepository groupRepository;
-@Autowired private UserRepository  userRepository;
+    @Autowired
+    private UserRepository userRepository;
+
     @PostConstruct
     public void init() {
         initPermission();
@@ -85,21 +87,21 @@ public class InitBeans {
     }
 
     public void initAdminUser() {
-      if(userRepository.findByLogin("admin")==null){
+        if (userRepository.findByLogin("admin") == null) {
             User u = new User();
-        u.setUsername("admin");
-        u.setFirstName("Admin");
-        u.setLastName("labo");
-        u.setTel("98858651");
-        u.setIndicatif("228");
-        u.setEmail("admin@gmail.com");
-        u.setPassword("admin");
-        u.setActivated(Boolean.TRUE);
-        u.setGroup(groupRepository.findByName("Administrateur").get(0));
-        UserDTO us = new UserDTO(u);
-        us.setPassword(u.getPassword());
-        userService.createUser(us, u.getGroup());
-      }
+            u.setUsername("admin");
+            u.setFirstName("Admin");
+            u.setLastName("labo");
+            u.setTel("98858651");
+            u.setIndicatif("228");
+            u.setEmail("admin@gmail.com");
+            u.setPassword("admin");
+            u.setActivated(Boolean.TRUE);
+            u.setGroup(groupRepository.findByName("Administrateur").get(0));
+            UserDTO us = new UserDTO(u);
+            us.setPassword(u.getPassword());
+            userService.createUser(us, u.getGroup());
+        }
     }
 
     @Bean
