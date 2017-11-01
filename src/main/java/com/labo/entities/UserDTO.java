@@ -19,7 +19,7 @@ public class UserDTO {
     
     @NotNull
     @Size(min = 1, max = 50)
-    private String login;
+    private String username;
 
     @Size(min = 3, max = 50)
     @NotNull()
@@ -41,46 +41,59 @@ public class UserDTO {
     @NotNull
     @Size(min = 7, max = 20)
     private String tel;
-
+ 
+    private String indicatif;
    
     private Set<String> authorities;
-
+private String password;
     public UserDTO() {
     }
 
     public UserDTO(User user) {
         this(user.getUsername(), user.getFirstName(), user.getLastName(),
-                user.getEmail(), user.getTel(), user.getActivated(), user.getLangKey(),
+                user.getEmail(), user.getTel(),user.getIndicatif(), user.getActivated(), user.getLangKey(),
                 user.getAuthorities());
     }
 
     public UserDTO(String login, String firstName, String lastName,
-            String email, String tel, boolean activated, String langKey, Set<String> authorities) {
+            String email, String tel,String indicatif, Boolean activated, String langKey, Set<String> authorities) {
 
-        this.login = login;
+        this.username = login;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.tel = tel;
         this.activated = activated;
         this.langKey = langKey;
-         
+         this.indicatif=indicatif;
         this.authorities = authorities;
         
        
     }
 
-    public String getLogin() {
-        return login;
+    public String getIndicatif() {
+        return indicatif;
     }
+
+    public void setIndicatif(String indicatif) {
+        this.indicatif = indicatif;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    
 
     public String getFirstName() {
         return firstName;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
-    }
+  
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
@@ -137,17 +150,18 @@ public class UserDTO {
         this.tel = tel;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     @Override
     public String toString() {
-        return "UserDTO{"
-                + "login='" + login + '\''
-                + ", firstName='" + firstName + '\''
-                + ", lastName='" + lastName + '\''
-                + ", email='" + email + '\''
-                + ", tel='" + tel + '\''
-                + ", activated=" + activated
-                + ", langKey='" + langKey + '\''
-                + ", authorities=" + authorities
-                + "}";
+        return "UserDTO{" + "username=" + username + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", activated=" + activated + ", langKey=" + langKey + ", tel=" + tel + ", indicatif=" + indicatif + ", authorities=" + authorities + ", password=" + password + '}';
     }
+
+   
 }

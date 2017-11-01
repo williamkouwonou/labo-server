@@ -33,7 +33,7 @@ public class Group implements Serializable{
     private String description;
     @ManyToMany
     @JoinTable(
-            name = "labo_permissions",
+            name = "labo_group_permissions",
             joinColumns = {
                 @JoinColumn(name = "user_id", referencedColumnName = "id")},
             inverseJoinColumns = {
@@ -120,7 +120,8 @@ public class Group implements Serializable{
     }
 
     public Set<Permission> getPermissions() {
-        return permissions;
+        
+        return permissions==null?new HashSet<>():permissions;
     }
 
     public void setPermissions(Set<Permission> permissions) {

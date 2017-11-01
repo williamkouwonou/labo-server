@@ -7,8 +7,10 @@ package com.labo.entities;
 
 import com.labo.utils.RandomUtil;
 import java.io.Serializable;
+import java.time.ZonedDateTime;
 import java.util.HashSet;
 import java.util.Objects;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -22,7 +24,7 @@ import javax.persistence.Transient;
  */
 @Entity
 @Table(name = "labo_user")
-public class User implements Serializable {
+public class User extends AbstractAuditingEntity implements Serializable {
 
     @Id
     private String id;
@@ -31,16 +33,21 @@ public class User implements Serializable {
     private String password;
     private String firstName;
     private String lastName;
-    private Boolean activated;
+    private Boolean activated=false;
     private String activationKey;
     private String resetKey;
     private String tel;
     private String indicatif;
     private String langKey;
+    @Column(name = "reset_date", nullable = true)
+    private ZonedDateTime resetDate = null;
     @Transient
     private HashSet<String> authorities;
     @ManyToOne
     private Group group;
+
+    public User() {
+    }
 
     public User(String username, String email, String password, String firstName, String lastName) {
         this.username = username;
@@ -222,6 +229,14 @@ public class User implements Serializable {
 
     public void setAuthorities(HashSet<String> authorities) {
         this.authorities = authorities;
+    }
+
+    public ZonedDateTime getResetDate() {
+        return resetDate;
+    }
+
+    public void setResetDate(ZonedDateTime resetDate) {
+        this.resetDate = resetDate;
     }
 
 }

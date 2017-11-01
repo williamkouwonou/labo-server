@@ -1,0 +1,27 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.labo.repositories;
+
+import com.labo.entities.Group;
+import com.labo.entities.Permission;
+import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
+/**
+ *
+ * @author NGS_004
+ */
+public interface GroupRepository  extends JpaRepository<Group, String>{
+     @Query(value = "select distinct g from Group g join fetch g.permissions",
+        countQuery = "select count(g) from Group g")
+    Page<Group> findAllWithPermission(Pageable pageable);
+    @Query("SELECT p FROM Group p WHERE p.name=:n")
+    public List<Group> findByName(@Param("n")String name);
+}
